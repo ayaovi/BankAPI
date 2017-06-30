@@ -42,8 +42,10 @@ namespace Bank.Tests.Persistence
       repository.Save(new Account { Id = 2864, Balance = 500, Currency = Currency.Euro });
       repository.Save(new Account { Id = 3097, Balance = 352 });
 
+      var accounts = repository.GetAllAccounts();
+
       //Assert
-      Assert.IsTrue(repository.GetAllAccounts().All(account => expected.Contains(account)));
+      Assert.IsTrue(expected.All(account => accounts.Contains(account)));
     }
   }
 }

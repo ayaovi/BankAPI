@@ -28,17 +28,7 @@ namespace Bank.Controllers
       {
         _accounts.Save(account);
       }
-      //_accounts.Save(account);
-      //if (id != account.Id)
-      //{
-      //  return Content(HttpStatusCode.BadRequest, new
-      //  {
-      //    Message = "Mismatching Ids",
-      //    UriID = id,
-      //    AccountID = account.Id
-      //  });
-      //}
-      //LazyAccounts.Value[id] = account;
+
       return Ok();
     }
   }
