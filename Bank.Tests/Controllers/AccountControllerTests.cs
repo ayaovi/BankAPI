@@ -83,5 +83,22 @@ namespace Bank.Tests.Controllers
       Assert.IsInstanceOf<OkNegotiatedContentResult<Account>>(response);
       Assert.IsTrue(Equals(expectedAccount, ((OkNegotiatedContentResult<Account>)response).Content));
     }
+
+    [Test]
+    public void Get_GivenAccountRepository_ExpectNotFound()
+    {
+      //Arrange
+      var controller = new AccountController
+      {
+        Request = new HttpRequestMessage(),
+        Configuration = new HttpConfiguration()
+      };
+
+      //Act
+      var response = controller.Get(13552);
+
+      //Assert
+      Assert.IsInstanceOf<NotFoundResult>(response);
+    }
   }
 }
