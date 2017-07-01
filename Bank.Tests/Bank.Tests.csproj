@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountControllerTests.cs" />
+    <Compile Include="Controllers\DepositControllerTests.cs" />
     <Compile Include="Controllers\ExchangeRateControllerTests.cs" />
     <Compile Include="Models\AccountTests.cs" />
     <Compile Include="Persistence\AccountRepositoryTests.cs" />
