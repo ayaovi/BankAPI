@@ -19,7 +19,7 @@ namespace Bank.Controllers
     }
 
     [ResponseType(typeof(Account))]
-    public IHttpActionResult Post(Deposit deposit)
+    public IHttpActionResult Post([FromBody]Deposit deposit)
     {
       var account = _accounts.GetAccount(deposit.AccountId);
       if (account == null) return Content(HttpStatusCode.NotFound, new { Message = $"Account with ID: {deposit.AccountId} does not exist." });

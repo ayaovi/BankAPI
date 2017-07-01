@@ -118,6 +118,7 @@
     <Compile Include="Controllers\BankController.cs" />
     <Compile Include="Controllers\DepositController.cs" />
     <Compile Include="Controllers\ExchangeRateController.cs" />
+    <Compile Include="Controllers\TransferController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -125,6 +126,7 @@
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\Deposit.cs" />
     <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\Transfer.cs" />
     <Compile Include="Persistence\AccountRepository.cs" />
     <Compile Include="Persistence\ExchangeRateRepository.cs" />
     <Compile Include="Persistence\IAccountRepository.cs" />
