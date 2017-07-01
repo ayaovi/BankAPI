@@ -8,6 +8,11 @@ namespace Bank.Controllers
 {
   public class TransferController : ApiController
   {
+    /// <summary>
+    /// Posts the specified transfer.
+    /// </summary>
+    /// <param name="transfer">The transfer.</param>
+    /// <returns></returns>
     [ResponseType(typeof(Account))]
     public IHttpActionResult Post([FromBody]Transfer transfer)
     {

@@ -9,15 +9,30 @@ namespace Bank.Controllers
 {
   public class DepositController : ApiController
   {
+    /// <summary>
+    /// The accounts
+    /// </summary>
     private readonly IAccountRepository _accounts;
+
+    /// <summary>
+    /// The rates
+    /// </summary>
     private readonly IExchangeRateRepository _rates;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="DepositController"/> class.
+    /// </summary>
     public DepositController()
     {
       _accounts = new AccountRepository();
       _rates = new ExchangeRateRepository();
     }
 
+    /// <summary>
+    /// Posts the specified deposit.
+    /// </summary>
+    /// <param name="deposit">The deposit.</param>
+    /// <returns></returns>
     [ResponseType(typeof(Account))]
     public IHttpActionResult Post([FromBody]Deposit deposit)
     {

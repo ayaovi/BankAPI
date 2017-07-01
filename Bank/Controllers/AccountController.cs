@@ -9,13 +9,24 @@ namespace Bank.Controllers
 {
   public class AccountController : ApiController
   {
+    /// <summary>
+    /// The accounts
+    /// </summary>
     private readonly IAccountRepository _accounts;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AccountController"/> class.
+    /// </summary>
     public AccountController()
     {
       _accounts = new AccountRepository();
     }
 
+    /// <summary>
+    /// Gets the account corresponding to the specified identifier.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <returns></returns>
     [ResponseType(typeof(Account))]
     public IHttpActionResult Get(int id)
     {
@@ -33,6 +44,11 @@ namespace Bank.Controllers
       return Ok();
     }
 
+    /// <summary>
+    /// Deletes the account corresponding to the specified identifier.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <returns></returns>
     public IHttpActionResult Delete(int id)
     {
       var account = _accounts.GetAccount(id);

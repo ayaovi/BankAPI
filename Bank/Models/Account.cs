@@ -5,12 +5,36 @@ namespace Bank.Models
 {
   public class Account
   {
+    /// <summary>
+    /// The account Id.
+    /// </summary>
     public int Id { get; set; }
+
+    /// <summary>
+    /// The account balance.
+    /// </summary>
     public decimal Balance { get; set; }
+
+    /// <summary>
+    /// The account currency.
+    /// </summary>
     public Currency Currency { get; set; } = Currency.Rand;
+
+    /// <summary>
+    /// The account status.
+    /// </summary>
     public Status Status { get; set; } = Status.Active;
+
+    /// <summary>
+    /// The account's transaction history.
+    /// </summary>
     public IList<Transaction> Transactions { get; set; } = new List<Transaction>();
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
     public override bool Equals(object obj)
     {
       // Check for null values and compare run-time types.
@@ -23,6 +47,11 @@ namespace Bank.Models
              Transactions.All(transaction => account.Transactions.Contains(transaction));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
     protected bool Equals(Account other)
     {
       return Id == other.Id && 
@@ -31,6 +60,10 @@ namespace Bank.Models
              Equals(Transactions, other.Transactions);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public override int GetHashCode()
     {
       unchecked
