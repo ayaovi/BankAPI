@@ -8,6 +8,7 @@ namespace Bank.Models
     public int Id { get; set; }
     public decimal Balance { get; set; }
     public Currency Currency { get; set; } = Currency.Rand;
+    public Status Status { get; set; } = Status.Active;
     public IList<Transaction> Transactions { get; set; } = new List<Transaction>();
 
     public override bool Equals(object obj)
