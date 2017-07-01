@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Bank.Models;
@@ -22,7 +23,7 @@ namespace Bank.Controllers
       return account != null ? (IHttpActionResult) Ok(account) : NotFound();
     }
 
-    public IHttpActionResult Post(IList<Account> accounts)
+    public IHttpActionResult Post([FromBody] IList<Account> accounts)
     {
       foreach (var account in accounts)
       {
@@ -30,6 +31,28 @@ namespace Bank.Controllers
       }
 
       return Ok();
+    }
+
+    public IHttpActionResult Delete(int id)
+    {
+      var account = _accounts.GetAccount(id);
+      if (account == null) return NotFound();
+      {
+        var controller = new DepositController
+        {
+          Request = new HttpRequestMessage(),
+          Configuration = new HttpConfiguration()
+        };
+        
+        controller.Post(new Deposit
+        {
+          AccountId = id, Amount = -account.Balance, Currency = account.Currency
+        });
+
+        account.Status = Status.Closed;
+
+        return Ok(account);
+      }
     }
   }
 }

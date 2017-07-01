@@ -125,6 +125,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\Deposit.cs" />
+    <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Transfer.cs" />
     <Compile Include="Persistence\AccountRepository.cs" />
