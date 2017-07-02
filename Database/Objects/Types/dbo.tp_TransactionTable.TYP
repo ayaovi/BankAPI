@@ -12,7 +12,7 @@ BEGIN
   CREATE TYPE dbo.tp_TransactionTable AS TABLE
   (
     AccountID INT NOT NULL
-    ,TransactionDate DATE NOT NULL
+    ,TransactionDate DATETIME NOT NULL
     ,Amount MONEY NOT NULL
   )
 END
