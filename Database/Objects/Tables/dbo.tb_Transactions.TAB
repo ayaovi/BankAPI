@@ -1,0 +1,32 @@
+
+USE Bank
+
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = OBJECT_ID(N'dbo.tb_Transactions'))
+BEGIN
+
+  CREATE TABLE dbo.tb_Transactions (
+  AccountID INT NOT NULL 
+  ,TransactionDate DATE NOT NULL
+  ,Amount MONEY NOT NULL
+  ,CONSTRAINT fk_Transactions_AccountID 
+    FOREIGN KEY (AccountID)
+    REFERENCES dbo.tb_Accounts (AccountID)
+  )
+
+END
+
+GO
+
+IF EXISTS(SELECT 1 FROM sys.procedures WHERE name = 'sp_Version')
+BEGIN
+  EXEC dbo.sp_Version @dboObject = 'dbo.tb_Transactions.TAB', @Version = 1, @ExpectedHash = '49EC48AAB87C2281DDF780EC4511EE8D'
+END
+ELSE
+BEGIN
+  PRINT 'Could not version ''dbo.tb_Transactions'''
+END
+
+GO
+
