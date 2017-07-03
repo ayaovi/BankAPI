@@ -1,24 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Bank.Models;
-using Bank.Persistence;
+using Bank.Persistence.Currency;
 
 namespace Bank.Controllers
 {
   public class ExchangeRateController : ApiController
   {
     /// <summary>
-    /// The rates
+    /// The exchange rate service
     /// </summary>
-    private readonly IExchangeRateRepository _rates;
+    private readonly IExchangeRateRepository _exchangeRateService;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ExchangeRateController"/> class.
     /// </summary>
-    public ExchangeRateController()
+    /// <param name="exchangeRateService">The exchange rate service.</param>
+    public ExchangeRateController(IExchangeRateRepository exchangeRateService)
     {
-      _rates = new ExchangeRateRepository();
+      _exchangeRateService = exchangeRateService;
     }
 
     /// <summary>
@@ -28,23 +30,18 @@ namespace Bank.Controllers
     /// <param name="to">The destination currency.</param>
     /// <returns></returns>
     [ResponseType(typeof(Currency))]
-    public IHttpActionResult Get(Currency from, Currency to)
+    public async Task<IHttpActionResult> Get(Currency from, Currency to)
     {
-      return Ok(_rates.GetExchangeRate(from, to));
+      return Ok((await _exchangeRateService.GetExchangeRateAsync(from, to)).First());
     }
 
-    /// <summary>
-    /// Posts the specified exchange rates.
-    /// </summary>
-    /// <param name="rates">The rates.</param>
-    /// <returns></returns>
-    public IHttpActionResult Post(IDictionary<Currency, decimal> rates)
-    {
-      foreach (var currency in rates.Keys)
-      {
-        _rates.Save(currency, rates[currency]);
-      }
-      return Ok();
-    }
+    //public IHttpActionResult Post(IDictionary<Currency, decimal> rates)
+    //{
+    //  foreach (var currency in rates.Keys)
+    //  {
+    //    _exchangeRateService.Save(currency, rates[currency]);
+    //  }
+    //  return Ok();
+    //}
   }
 }

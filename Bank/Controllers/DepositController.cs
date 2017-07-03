@@ -1,31 +1,37 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Bank.Models;
-using Bank.Persistence;
+using Bank.Persistence.Account;
+using Bank.Persistence.Currency;
 
 namespace Bank.Controllers
 {
   public class DepositController : ApiController
   {
     /// <summary>
-    /// The accounts
+    /// The account service
     /// </summary>
-    private readonly IAccountRepository _accounts;
+    private readonly IAccountRepository _accountRepository;
 
     /// <summary>
-    /// The rates
+    /// The exchange rate service
     /// </summary>
-    private readonly IExchangeRateRepository _rates;
+    private readonly IExchangeRateRepository _exchangeRateRepository;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DepositController"/> class.
     /// </summary>
-    public DepositController()
+    /// <param name="accountRepository">The account service.</param>
+    /// <param name="exchangeRateRepository">The exchange rate service.</param>
+    public DepositController(IAccountRepository accountRepository, IExchangeRateRepository exchangeRateRepository)
     {
-      _accounts = new AccountRepository();
-      _rates = new ExchangeRateRepository();
+      _accountRepository = accountRepository;
+      _exchangeRateRepository = exchangeRateRepository;
     }
 
     /// <summary>
@@ -34,14 +40,14 @@ namespace Bank.Controllers
     /// <param name="deposit">The deposit.</param>
     /// <returns></returns>
     [ResponseType(typeof(Account))]
-    public IHttpActionResult Post([FromBody]Deposit deposit)
+    public async Task<IHttpActionResult> Post([FromBody]Deposit deposit)
     {
-      var account = _accounts.GetAccount(deposit.AccountId);
+      var account = (await _accountRepository.GetAccountsAsync(new List<int>(deposit.AccountId))).First();
       if (account == null) return Content(HttpStatusCode.NotFound, new { Message = $"Account with ID: {deposit.AccountId} does not exist." });
       {
         if (account.Status == Status.Closed) return Content(HttpStatusCode.BadRequest, new { Message = $"Account with ID: {deposit.AccountId} is CLOSED." });
         {
-          var amount = deposit.Amount * _rates.GetExchangeRate(deposit.Currency, account.Currency);
+          var amount = deposit.Amount * (await _exchangeRateRepository.GetExchangeRateAsync(deposit.Currency, account.Currency)).First();
           if (amount < 0 && account.Balance < -amount)
             return Content(HttpStatusCode.BadRequest, new
             {
