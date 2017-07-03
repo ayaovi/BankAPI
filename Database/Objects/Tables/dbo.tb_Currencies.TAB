@@ -9,7 +9,10 @@ BEGIN
   CREATE TABLE dbo.tb_Currencies (
     ID INT NOT NULL 
     ,Name VARCHAR(50) NOT NULL
-    ,Value DECIMAL NOT NULL
+    ,Value MONEY NOT NULL
+    ,CONSTRAINT pk_Currencies PRIMARY KEY (
+      ID
+    )
   )
 
 END
