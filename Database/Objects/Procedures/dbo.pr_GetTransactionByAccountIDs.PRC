@@ -15,7 +15,7 @@ AS
 
   SELECT 
         AccountID 
-        ,TransactionDate 
+        ,TransactionDate as Date
         ,Amount 
   FROM  tb_Transactions
   WHERE AccountID IN (SELECT Value FROM @AccountIDs);
