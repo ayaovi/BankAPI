@@ -10,12 +10,12 @@ ALTER PROCEDURE dbo.pr_GetAccountByAccountIDs
 AS
 
   SELECT 
-        AccountID
+        ID
         ,Balance
         ,Currency
-        ,AccountStatus
+        ,AccountStatus as Status
   FROM  tb_Accounts
-  WHERE AccountID IN (SELECT Value FROM @AccountIDs);
+  WHERE ID IN (SELECT Value FROM @AccountIDs);
 
 GO
 
