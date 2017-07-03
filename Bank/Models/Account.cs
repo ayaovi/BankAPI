@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Bank.Models
@@ -8,21 +9,25 @@ namespace Bank.Models
     /// <summary>
     /// The account Id.
     /// </summary>
+    [Required]
     public int Id { get; set; }
 
     /// <summary>
     /// The account balance.
     /// </summary>
+    [Required]
     public decimal Balance { get; set; }
 
     /// <summary>
     /// The account currency.
     /// </summary>
+    [Required]
     public Currency Currency { get; set; } = Currency.Rand;
 
     /// <summary>
     /// The account status.
     /// </summary>
+    [Required]
     public Status Status { get; set; } = Status.Active;
 
     /// <summary>
