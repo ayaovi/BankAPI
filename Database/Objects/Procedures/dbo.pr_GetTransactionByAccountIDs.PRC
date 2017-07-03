@@ -8,7 +8,7 @@ IF NOT EXISTS(SELECT * FROM sysobjects where id = object_id(N'dbo.pr_GetTransact
 
 GO
 
-ALTER PROCEDURE dbo.pr_GetAccountByAccountIDs
+ALTER PROCEDURE dbo.pr_GetTransactionByAccountIDs
   @AccountIDs tp_IntTable READONLY
 
 AS
