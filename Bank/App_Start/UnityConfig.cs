@@ -1,7 +1,5 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 using System.Web.Http;
-using Bank.Persistence;
 using Bank.Persistence.Account;
 using Bank.Persistence.Common;
 using Bank.Persistence.Currency;
