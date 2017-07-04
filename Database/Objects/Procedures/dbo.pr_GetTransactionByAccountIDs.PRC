@@ -31,3 +31,5 @@ BEGIN
   PRINT 'Could not version ''dbo.pr_GetTransactionByAccountIDs'''
 END
 
+GO
+

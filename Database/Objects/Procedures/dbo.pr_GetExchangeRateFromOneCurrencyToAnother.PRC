@@ -26,3 +26,5 @@ BEGIN
   PRINT 'Could not version ''dbo.pr_GetExchangeRateFromOneCurrencyToAnother'''
 END
 
+GO
+

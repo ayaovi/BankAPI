@@ -1,3 +1,4 @@
+
 USE Bank
 
 IF NOT EXISTS(SELECT * FROM sysobjects where id = object_id(N'dbo.pr_GetAccountByAccountIDs') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
@@ -27,4 +28,6 @@ ELSE
 BEGIN
   PRINT 'Could not version ''dbo.pr_GetAccountByAccountIDs'''
 END
+
+GO
 

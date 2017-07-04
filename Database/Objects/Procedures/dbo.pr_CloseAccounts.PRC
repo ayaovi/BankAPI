@@ -1,3 +1,4 @@
+
 USE Bank
 
 GO
@@ -25,4 +26,6 @@ ELSE
 BEGIN
   PRINT 'Could not version ''dbo.pr_CloseAccounts'''
 END
+
+GO
 

@@ -29,3 +29,5 @@ BEGIN
   PRINT 'Could not version ''dbo.pr_GetTransactions'''
 END
 
+GO
+
