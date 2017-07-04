@@ -46,7 +46,7 @@ namespace Bank.Persistence.Transaction
         {
           AccountIDs = accountIdsDataTable
         };
-        return await connection.QueryAsync<Models.Transaction>(ProcGetTransactionByAccountIds, param: parameters, commandType: CommandType.StoredProcedure);
+        return await connection.QueryAsync<Models.Transaction>(ProcGetTransactionByAccountIds, parameters, commandType: CommandType.StoredProcedure);
       }
     }
 

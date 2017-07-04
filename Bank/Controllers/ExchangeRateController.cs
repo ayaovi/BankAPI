@@ -32,7 +32,7 @@ namespace Bank.Controllers
     [ResponseType(typeof(Currency))]
     public async Task<IHttpActionResult> Get(Currency from, Currency to)
     {
-      return Ok((await _exchangeRateService.GetExchangeRateAsync(from, to)).First());
+      return Ok((await _exchangeRateService.GetExchangeRateAsync(from, to)).Single());
     }
   }
 }

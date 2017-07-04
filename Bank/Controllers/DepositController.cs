@@ -42,12 +42,12 @@ namespace Bank.Controllers
     [ResponseType(typeof(Account))]
     public async Task<IHttpActionResult> Post([FromBody]Deposit deposit)
     {
-      var account = (await _accountRepository.GetAccountsAsync(new List<int>(deposit.AccountId))).First();
+      var account = (await _accountRepository.GetAccountsAsync(new List<int>(deposit.AccountId))).Single();
       if (account == null) return Content(HttpStatusCode.NotFound, new { Message = $"Account with ID: {deposit.AccountId} does not exist." });
       {
         if (account.Status == Status.Closed) return Content(HttpStatusCode.BadRequest, new { Message = $"Account with ID: {deposit.AccountId} is CLOSED." });
         {
-          var amount = deposit.Amount * (await _exchangeRateRepository.GetExchangeRateAsync(deposit.Currency, account.Currency)).First();
+          var amount = deposit.Amount * (await _exchangeRateRepository.GetExchangeRateAsync(deposit.Currency, account.Currency)).Single();
           if (amount < 0 && account.Balance < -amount)
             return Content(HttpStatusCode.BadRequest, new
             {
