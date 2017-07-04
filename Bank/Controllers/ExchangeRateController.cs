@@ -34,14 +34,5 @@ namespace Bank.Controllers
     {
       return Ok((await _exchangeRateService.GetExchangeRateAsync(from, to)).First());
     }
-
-    //public IHttpActionResult Post(IDictionary<Currency, decimal> rates)
-    //{
-    //  foreach (var currency in rates.Keys)
-    //  {
-    //    _exchangeRateService.Save(currency, rates[currency]);
-    //  }
-    //  return Ok();
-    //}
   }
 }

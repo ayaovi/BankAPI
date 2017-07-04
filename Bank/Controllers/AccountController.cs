@@ -23,7 +23,10 @@ namespace Bank.Controllers
     /// </summary>
     private readonly IExchangeRateRepository _exchangeRateRepository;
 
-    private ITransactionRepository _transactionRepository;
+    /// <summary>
+    /// The transaction repository
+    /// </summary>
+    private readonly ITransactionRepository _transactionRepository;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AccountController"/> class.
@@ -43,7 +46,7 @@ namespace Bank.Controllers
     [ResponseType(typeof(Account))]
     public async Task<IHttpActionResult> Get(int id)
     {
-      var account = (await _accountRepository.GetAccountsAsync(new List<int> { id })).First();
+      var account = (await _accountRepository.GetAccountsAsync(new List<int> { id })).Single();
       account.Transactions = (await _transactionRepository.GetTransactionByAccountIdsAsync(new List<int> {id})).ToList();
       return Ok(account);
     }
@@ -65,7 +68,7 @@ namespace Bank.Controllers
     /// <returns></returns>
     public async Task<IHttpActionResult> Delete(int id)
     {
-      var account = (await _accountRepository.GetAccountsAsync(new List<int> { id })).First();
+      var account = (await _accountRepository.GetAccountsAsync(new List<int> { id })).Single();
       if (account == null) return NotFound();
       {
         var controller = new DepositController(_accountRepository, _exchangeRateRepository)

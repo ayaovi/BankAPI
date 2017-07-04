@@ -54,6 +54,7 @@ namespace Bank.Controllers
       });
 
       if (actionResult.GetType() != typeof(OkNegotiatedContentResult<Account>)) return actionResult;
+
       return await controller.Post(new Deposit
       {
         AccountId = transfer.DestinationAccountId,
